@@ -23,11 +23,19 @@ public class SpecBuilder {
         return requestSpecBuilder.build();
     }
 
-    public static ResponseSpecification getResponseSpec() {
+    public static ResponseSpecification getResponseSpecCreate() {
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
         responseSpecBuilder.expectStatusCode(201);
         responseSpecBuilder.expectContentType(ContentType.JSON);
         responseSpecBuilder.log(LogDetail.ALL);
+        return responseSpecBuilder.build();
+    }
+
+    public static ResponseSpecification getResponseSpecLogin() {
+        ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
+        responseSpecBuilder.expectStatusCode(200);
+        responseSpecBuilder.expectContentType(ContentType.JSON);
+//        responseSpecBuilder.log(LogDetail.ALL);
         return responseSpecBuilder.build();
     }
 }

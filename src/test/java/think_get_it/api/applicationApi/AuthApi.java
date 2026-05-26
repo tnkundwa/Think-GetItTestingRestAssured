@@ -2,17 +2,18 @@ package think_get_it.api.applicationApi;
 
 import pojo.request.LoginUserReq;
 import pojo.request.RegisterUser;
-import pojo.response.UserResponse;
+import pojo.response.ResponsePojo;
+import pojo.response.UserDataPojo;
 import think_get_it.api.Routes;
 
 import static io.restassured.RestAssured.given;
-import static think_get_it.api.SpecBuilder.getRequestSpec;
-import static think_get_it.api.SpecBuilder.getResponseSpec;
+import static think_get_it.api.SpecBuilder.*;
 
 
 public class AuthApi {
 
-    public static UserResponse registerUser() {
+    @SuppressWarnings("unchecked")
+    public static ResponsePojo<UserDataPojo> registerUser() {
         RegisterUser request = new RegisterUser();
         request.setEmail("jo12@x.com");
         request.setPassword("MyPass@123");
@@ -23,13 +24,14 @@ public class AuthApi {
         return given(getRequestSpec()).
                 body(request).
                 when().
-                post("auth/register").
+                post(Routes.AUTH + Routes.REGISTER).
                 then().
-                spec(getResponseSpec()).
-                extract().as(UserResponse.class);
+                spec(getResponseSpecCreate()).
+                extract().as(ResponsePojo.class);
     }
 
-    public static UserResponse login() {
+    @SuppressWarnings("unchecked")
+    public static ResponsePojo<UserDataPojo> login() {
         LoginUserReq request = new LoginUserReq();
         request.setEmail("john@example.com");
         request.setPassword("MyPass@123");
@@ -38,8 +40,8 @@ public class AuthApi {
                 when().
                 post(Routes.AUTH + Routes.LOGIN).
                 then().
-                spec(getResponseSpec()).
-                extract().as(UserResponse.class);
+                spec(getResponseSpecLogin()).
+                extract().as(ResponsePojo.class);
 
     }
 }
