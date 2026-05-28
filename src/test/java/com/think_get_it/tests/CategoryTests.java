@@ -1,11 +1,11 @@
-package think_get_it.tests;
+package com.think_get_it.tests;
 
+import com.think_get_it.api.applicationApi.CategoryApi;
+import com.think_get_it.pojo.response.ProductDataPojo;
+import com.think_get_it.pojo.response.ResponsePojo;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import pojo.response.ProductDataPojo;
-import pojo.response.ResponsePojo;
-import think_get_it.api.applicationApi.CategoryApi;
 
 import java.util.List;
 

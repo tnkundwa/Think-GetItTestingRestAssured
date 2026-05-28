@@ -1,10 +1,12 @@
-package pojo.response;
+package com.think_get_it.pojo.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductsEndPointData {
 
     private String id;

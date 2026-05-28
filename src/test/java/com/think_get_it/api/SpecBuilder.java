@@ -1,4 +1,4 @@
-package think_get_it.api;
+package com.think_get_it.api;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -16,7 +16,7 @@ public class SpecBuilder {
     public static RequestSpecification getRequestSpec() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri("https://think-and-get-it-production.up.railway.app");
-//        requestSpecBuilder.addHeader("Authorization", "Bearer " + access_token);
+        requestSpecBuilder.addHeader("Authorization", "Bearer " + access_token);
         requestSpecBuilder.setBasePath(Routes.API + Routes.BASE_PATH);
         requestSpecBuilder.setContentType(ContentType.JSON);
         requestSpecBuilder.log(LogDetail.ALL);
@@ -35,7 +35,7 @@ public class SpecBuilder {
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
         responseSpecBuilder.expectStatusCode(200);
         responseSpecBuilder.expectContentType(ContentType.JSON);
-//        responseSpecBuilder.log(LogDetail.ALL);
+        responseSpecBuilder.log(LogDetail.ALL);
         return responseSpecBuilder.build();
     }
 }

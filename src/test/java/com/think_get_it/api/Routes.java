@@ -1,4 +1,4 @@
-package think_get_it.api;
+package com.think_get_it.api;
 
 public class Routes {
     public static final String BASE_PATH = "/v1/";
