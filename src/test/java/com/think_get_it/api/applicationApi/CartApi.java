@@ -18,4 +18,8 @@ public class CartApi {
                 .spec(getResponseSpecLogin())
                 .extract().response();
     }
+
+//    public static Response addProductToCart() {
+//
+//    }
 }

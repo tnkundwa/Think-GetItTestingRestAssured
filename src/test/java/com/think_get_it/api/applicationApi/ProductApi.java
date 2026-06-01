@@ -4,6 +4,7 @@ import com.think_get_it.api.Routes;
 import io.restassured.response.Response;
 
 import static com.think_get_it.api.SpecBuilder.getRequestSpec;
+import static com.think_get_it.api.SpecBuilder.getResponseSpecLogin;
 import static io.restassured.RestAssured.given;
 
 public class ProductApi {
@@ -15,7 +16,10 @@ public class ProductApi {
                 queryParam("limit", limit).
                 queryParam("category", category).
                 when().
-                get(Routes.PRODUCTS);
+                get(Routes.PRODUCTS)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
     }
 
     @SuppressWarnings("unchecked")
@@ -23,6 +27,9 @@ public class ProductApi {
         return given(getRequestSpec()).
                 pathParam("slug", slug).
                 when().
-                get(Routes.PRODUCTS + "/{slug}");
+                get(Routes.PRODUCTS + "/{slug}")
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
     }
 }
