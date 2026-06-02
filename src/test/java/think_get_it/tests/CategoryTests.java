@@ -15,7 +15,7 @@ import static org.testng.Assert.*;
 public class CategoryTests {
 
     @Test
-    public void testCart() {
+    public void testCartPage() {
         ResponsePojo<List<ProductDataPojo>> res = CategoryApi.getAllCategories().as(new TypeRef<ResponsePojo<List<ProductDataPojo>>>() {
         });
         assertNotNull(res, "The response should not be null");

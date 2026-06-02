@@ -13,11 +13,13 @@ import static org.hamcrest.Matchers.everyItem;
 import static think_get_it.api.applicationApi.ProductApi.getProducts;
 
 public class ProductsTests {
+    String targetCategory = "home-living";
+
     @Test
     public void verifyPaginationLimitsItems() {
         int limit = 20;
 
-        getProducts(1, 20, "home-living")
+        getProducts(1, 20, targetCategory)
                 .then()
                 .body("success", equalTo(true))
                 .body("message", equalTo("Success"))
@@ -26,11 +28,9 @@ public class ProductsTests {
 
     @Test
     public void verifyCategoryFiltering() {
-        String targetCategory = "home-living";
 
-        getProducts(1, 10, "home-living")
+        getProducts(1, 10, targetCategory)
                 .then()
-                .body("data.category.slug", everyItem(equalTo("home-living")))
                 .body("data.isActive", everyItem(equalTo(true)))
                 .body("data.category.slug", everyItem(equalTo(targetCategory)));
     }
@@ -38,7 +38,7 @@ public class ProductsTests {
     @Test
     public void getOneProductBySlug() {
 
-        ResponsePojo<List<ProductsEndPointData>> response = getProducts(1, 10, "home-living")
+        ResponsePojo<List<ProductsEndPointData>> response = getProducts(1, 10, targetCategory)
                 .then()
                 .extract()
                 .as(new TypeRef<ResponsePojo<List<ProductsEndPointData>>>() {
