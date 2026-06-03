@@ -7,10 +7,12 @@ public class Routes {
     public static final String AUTH = "/auth";
     public static final String REGISTER = "/register";
     public static final String LOGIN = "/login";
+    public static final String PROFILE = "/profile";
+    public static final String CHANGE_PASSWORD = "/change-password";
     public static final String VERIFYEMAIL = "/verify-email";
     public static final String FORGOTPASSWORD = "/forgot-password";
     public static final String RESETPASSWORD = "/reset-password";
-    public static final String ME = "";
+    public static final String ME = "/me";
     public static final String REFRESH = "/refresh";
     public static final String CATEGORIES = "/categories";
     public static final String PRODUCTS = "/products";

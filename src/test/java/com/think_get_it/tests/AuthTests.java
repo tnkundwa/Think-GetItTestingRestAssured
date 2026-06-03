@@ -5,8 +5,10 @@ import com.think_get_it.pojo.request.LoginUserReq;
 import com.think_get_it.pojo.request.RegisterUser;
 import com.think_get_it.pojo.response.ResponsePojo;
 import com.think_get_it.pojo.response.UserDataPojo;
-import org.testng.Assert;
+import com.think_get_it.utils.ConfigLoader;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertNotNull;
 
 public class AuthTests {
 
@@ -19,15 +21,15 @@ public class AuthTests {
         request.setLastName("Doe");
         request.setPhone("+250788123456");
         ResponsePojo<UserDataPojo> res = AuthApi.registerUser(request);
-        Assert.assertNotNull(res, "The response should not be null");
+        assertNotNull(res, "The response should not be null");
     }
 
     @Test
     public void loginUser() {
         LoginUserReq request = new LoginUserReq();
-        request.setEmail("tn@gmail.com");
-        request.setPassword("Admin@123456");
+        request.setEmail(ConfigLoader.getInstance().getUserEmail());
+        request.setPassword(ConfigLoader.getInstance().getPassword());
         ResponsePojo<UserDataPojo> res = AuthApi.login(request);
-        Assert.assertNotNull(res, "The response should not be null");
+        assertNotNull(res, "The response should not be null");
     }
 }
