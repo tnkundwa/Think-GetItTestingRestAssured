@@ -3,10 +3,16 @@ package com.think_get_it.api.applicationApi;
 import com.github.javafaker.Faker;
 import com.think_get_it.pojo.request.LoginUserReq;
 import com.think_get_it.pojo.request.RegisterUser;
+import com.think_get_it.pojo.response.ProductsEndPointData;
+import com.think_get_it.pojo.response.ResponsePojo;
 import com.think_get_it.utils.ConfigLoader;
+import io.restassured.common.mapper.TypeRef;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static com.think_get_it.api.applicationApi.ProductApi.getProducts;
 
 public class RestResources {
 
@@ -48,6 +54,26 @@ public class RestResources {
         Map<String, String> request = new HashMap<>();
         request.put("currentPassword", "");
         request.put("newPassword", "");
+        return request;
+    }
+
+    public static Map<String, String> getProductDetails(String productName) {
+        String quantity = "2";
+        Map<String, String> request = new HashMap<>();
+        request.put("quantity", quantity);
+        ResponsePojo<List<ProductsEndPointData>> res = getProducts(1, 10, "home-living")
+                .then()
+                .extract()
+                .as(new TypeRef<ResponsePojo<List<ProductsEndPointData>>>() {
+                });
+        List<ProductsEndPointData> list = res.getData();
+        ProductsEndPointData singleProduct = list.stream().filter(product -> product.getName().equals(productName)).findFirst().orElse(null);
+        if (singleProduct != null) {
+            request.put("productId", singleProduct.getId());
+            request.put("variantId", singleProduct.getName());
+        } else {
+            throw new RuntimeException("Product not found with name: " + productName);
+        }
         return request;
     }
 }
