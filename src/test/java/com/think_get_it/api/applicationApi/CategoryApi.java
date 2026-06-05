@@ -1,16 +1,17 @@
-package think_get_it.api.applicationApi;
+package com.think_get_it.api.applicationApi;
 
+import com.think_get_it.api.Routes;
+import com.think_get_it.pojo.response.ProductDataPojo;
+import com.think_get_it.pojo.response.ResponsePojo;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
-import pojo.response.ProductDataPojo;
-import pojo.response.ResponsePojo;
-import think_get_it.api.Routes;
 
 import java.util.List;
 import java.util.Random;
 
+import static com.think_get_it.api.SpecBuilder.getRequestSpec;
+import static com.think_get_it.api.SpecBuilder.getResponseSpecLogin;
 import static io.restassured.RestAssured.given;
-import static think_get_it.api.SpecBuilder.getRequestSpec;
 
 public class CategoryApi {
 
@@ -18,7 +19,10 @@ public class CategoryApi {
 
         return given(getRequestSpec()).
                 when().
-                get(Routes.CATEGORIES);
+                get(Routes.CATEGORIES)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
     }
 
     public static String getRandomSlug() {
@@ -29,11 +33,13 @@ public class CategoryApi {
     }
 
     public static Response getCategoryBySlug(String slug) {
-
         return given(getRequestSpec()).
                 pathParam("slug", slug).
                 when().
-                get(Routes.CATEGORIES + "/{slug}");
+                get(Routes.CATEGORIES + "/{slug}")
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
     }
 
 }

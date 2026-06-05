@@ -1,4 +1,4 @@
-package think_get_it.utils;
+package com.think_get_it.utils;
 
 import java.util.Properties;
 
