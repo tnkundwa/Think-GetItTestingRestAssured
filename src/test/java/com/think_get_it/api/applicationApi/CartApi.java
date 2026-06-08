@@ -39,4 +39,25 @@ public class CartApi {
                 .spec(getResponseSpecLogin())
                 .extract().response();
     }
+
+    public static Response updateCartQuantity(String quantity, String itemId) {
+        return given(getRequestSpec())
+                .pathParam("itemId", itemId)
+                .when()
+                .body(quantity)
+                .put(Routes.CART + Routes.ITEMS)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
+    }
+
+    public static Response deleteItemFromCart(String itemId) {
+        return given(getRequestSpec())
+                .pathParam("itemId", itemId)
+                .when()
+                .delete(Routes.CART + Routes.ITEMS)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
+    }
 }

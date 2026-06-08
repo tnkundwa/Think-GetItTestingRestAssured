@@ -76,4 +76,15 @@ public class RestResources {
         }
         return request;
     }
+
+    public static String getProductId(String productName) {
+        ResponsePojo<List<ProductsEndPointData>> res = getProducts(1, 10, "home-living")
+                .then()
+                .extract()
+                .as(new TypeRef<ResponsePojo<List<ProductsEndPointData>>>() {
+                });
+        List<ProductsEndPointData> list = res.getData();
+        ProductsEndPointData singleProduct = list.stream().filter(product -> product.getName().equals(productName)).findFirst().orElse(null);
+        return singleProduct.getId();
+    }
 }

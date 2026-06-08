@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static com.think_get_it.api.applicationApi.RestResources.getProductDetails;
+import static com.think_get_it.api.applicationApi.RestResources.getProductId;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -28,5 +29,15 @@ public class CartTests {
         ProductAddedToCartPojo productAddedToCart = res.getBody().as(ProductAddedToCartPojo.class);
         assertEquals("true", productAddedToCart.getSuccess());
         assertEquals("Item added to cart", productAddedToCart.getMessage());
+    }
+
+    @Test
+    public void updateCartItemQuantityTest() {
+        Response res = CartApi.updateCartQuantity("5", getProductId("Ubrtiuob"));
+    }
+
+    @Test
+    public void deleteItemFromCartTest() {
+        Response res = CartApi.deleteItemFromCart(getProductId("Ubrtiuob"));
     }
 }
