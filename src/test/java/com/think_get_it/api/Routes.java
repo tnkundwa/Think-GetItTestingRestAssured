@@ -19,6 +19,7 @@ public class Routes {
     public static final String CART = "/cart";
     public static final String ITEMS = "/items";
     public static final String ORDERS = "/orders";
+    public static final String CANCEL = "/cancel";
     public static final String REVIEWS = "/reviews";
     public static final String SEARCH = "/search";
     public static final String ADMIN = "/admin";

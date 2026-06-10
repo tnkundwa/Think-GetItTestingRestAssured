@@ -87,4 +87,20 @@ public class RestResources {
         ProductsEndPointData singleProduct = list.stream().filter(product -> product.getName().equals(productName)).findFirst().orElse(null);
         return singleProduct.getId();
     }
+
+    public static Map<String, String> itemToOrder() {
+        Map<String, String> request = new HashMap<>();
+        request.put("addressId", "kk21st");
+        request.put("paymentMethod", "CASH_ON_DELIVERY");
+        request.put("notes", "Leave it and go home");
+        request.put("shippingFee", "0");
+        return request;
+    }
+
+    public static Map<String, Object> orderDetails() {
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("page", 1);
+        queryParams.put("status", "PENDING");
+        return queryParams;
+    }
 }
