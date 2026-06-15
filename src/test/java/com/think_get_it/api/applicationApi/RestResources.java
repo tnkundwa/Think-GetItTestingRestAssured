@@ -97,6 +97,14 @@ public class RestResources {
         return request;
     }
 
+    public static Map<String, Object> reviewToProduct() {
+        Map<String, Object> request = new HashMap<>();
+        request.put("rating", 5);
+        request.put("title", "CASH_ON_DELIVERY");
+        request.put("body", "Leave it and go home");
+        return request;
+    }
+
     public static Map<String, Object> orderDetails() {
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("page", 1);
