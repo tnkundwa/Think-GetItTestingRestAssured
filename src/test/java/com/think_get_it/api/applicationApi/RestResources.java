@@ -105,6 +105,17 @@ public class RestResources {
         return request;
     }
 
+    public static Map<String, Object> searchProduct() {
+        Map<String, Object> request = new HashMap<>();
+        request.put("searchQuery", "q");
+        request.put("limit", 1);
+        request.put("category", "home");
+        request.put("minPrice", 5);
+        request.put("maxPrice", 12);
+        request.put("sort", "price_asc");
+        return request;
+    }
+
     public static Map<String, Object> orderDetails() {
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("page", 1);

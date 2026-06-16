@@ -23,5 +23,6 @@ public class Routes {
     public static final String REVIEWS = "/reviews";
     public static final String WISHLIST = "/wishlist";
     public static final String SEARCH = "/search";
+    public static final String TRENDING = "/trending";
     public static final String ADMIN = "/admin";
 }
