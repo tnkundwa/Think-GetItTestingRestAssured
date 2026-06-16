@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 
 import static com.think_get_it.api.applicationApi.RestResources.getProductId;
 import static com.think_get_it.api.applicationApi.RestResources.reviewToProduct;
-import static com.think_get_it.api.applicationApi.Reviews.getProductReview;
-import static com.think_get_it.api.applicationApi.Reviews.leaveProductReview;
+import static com.think_get_it.api.applicationApi.ReviewsApi.getProductReview;
+import static com.think_get_it.api.applicationApi.ReviewsApi.leaveProductReview;
 import static org.testng.Assert.assertEquals;
 
 public class ReviewTests {

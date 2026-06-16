@@ -9,7 +9,7 @@ import static com.think_get_it.api.SpecBuilder.getRequestSpec;
 import static com.think_get_it.api.SpecBuilder.getResponseSpecLogin;
 import static io.restassured.RestAssured.given;
 
-public class Reviews {
+public class ReviewsApi {
 
     public static Response getProductReview(String productId, int page, String sort) {
         return given(getRequestSpec())

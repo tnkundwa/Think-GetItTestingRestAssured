@@ -1,6 +1,7 @@
 package com.think_get_it.api.applicationApi;
 
 import com.think_get_it.api.Routes;
+import com.think_get_it.pojo.response.AddressDataPojo;
 import com.think_get_it.pojo.response.ResponsePojo;
 import com.think_get_it.pojo.response.User;
 import io.restassured.common.mapper.TypeRef;
@@ -47,6 +48,18 @@ public class UserApi {
                 .extract()
                 .response()
                 .as(new TypeRef<ResponsePojo<User>>() {
+                });
+    }
+
+    public static AddressDataPojo getUserAddress() {
+        return given(getRequestSpec())
+                .when()
+                .put(Routes.USERS + Routes.ADDRESSES)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract()
+                .response()
+                .as(new TypeRef<AddressDataPojo>() {
                 });
     }
 }

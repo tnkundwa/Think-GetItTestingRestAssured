@@ -27,4 +27,5 @@ public class Routes {
     public static final String ADMIN = "/admin";
     public static final String DASHBOARD = "/dashboard";
     public static final String COUPONS = "/coupons";
+    public static final String ADDRESSES = "/addresses";
 }

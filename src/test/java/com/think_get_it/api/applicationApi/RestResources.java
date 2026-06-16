@@ -4,8 +4,7 @@ import com.github.javafaker.Faker;
 import com.think_get_it.pojo.request.CouponsPojo;
 import com.think_get_it.pojo.request.LoginUserReq;
 import com.think_get_it.pojo.request.RegisterUser;
-import com.think_get_it.pojo.response.ProductsEndPointData;
-import com.think_get_it.pojo.response.ResponsePojo;
+import com.think_get_it.pojo.response.*;
 import com.think_get_it.utils.ConfigLoader;
 import io.restassured.common.mapper.TypeRef;
 
@@ -14,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.think_get_it.api.applicationApi.ProductApi.getProducts;
+import static com.think_get_it.api.applicationApi.UserApi.getUserAddress;
 
 public class RestResources {
 
@@ -89,9 +89,22 @@ public class RestResources {
         return singleProduct.getId();
     }
 
+    public static String getProductIdInCart(int product) {
+        ResponsePojo<CartDataPojo> res = CartApi.getCart().as(new TypeRef<ResponsePojo<CartDataPojo>>() {
+        });
+        List<ItemsPojo> allItems = res.getData().getItems();
+        return allItems.get(product).getId();
+    }
+
+    public static String getAddressId() {
+        AddressDataPojo data = getUserAddress();
+        return data.getId();
+    }
+
+
     public static Map<String, String> itemToOrder() {
         Map<String, String> request = new HashMap<>();
-        request.put("addressId", "kk21st");
+        request.put("addressId", getAddressId());
         request.put("paymentMethod", "CASH_ON_DELIVERY");
         request.put("notes", "Leave it and go home");
         request.put("shippingFee", "0");
@@ -135,4 +148,5 @@ public class RestResources {
         queryParams.put("status", "PENDING");
         return queryParams;
     }
+
 }
