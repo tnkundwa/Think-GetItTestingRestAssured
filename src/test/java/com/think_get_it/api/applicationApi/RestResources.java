@@ -1,6 +1,7 @@
 package com.think_get_it.api.applicationApi;
 
 import com.github.javafaker.Faker;
+import com.think_get_it.pojo.request.CouponsPojo;
 import com.think_get_it.pojo.request.LoginUserReq;
 import com.think_get_it.pojo.request.RegisterUser;
 import com.think_get_it.pojo.response.ProductsEndPointData;
@@ -103,6 +104,18 @@ public class RestResources {
         request.put("title", "CASH_ON_DELIVERY");
         request.put("body", "Leave it and go home");
         return request;
+    }
+
+    public static CouponsPojo getCoupons() {
+        CouponsPojo coupons = new CouponsPojo();
+        coupons.setCode("code");
+        coupons.setDescription("description");
+        coupons.setDiscountType("PERCENTAGE");
+        coupons.setDiscountValue(1);
+        coupons.setMinOrderAmount(12);
+        coupons.setMaxUsers(10);
+        coupons.setExpiresAt("2026-06-16T07:39:03.334Z");
+        return coupons;
     }
 
     public static Map<String, Object> searchProduct() {

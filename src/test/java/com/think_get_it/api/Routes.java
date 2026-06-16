@@ -25,4 +25,6 @@ public class Routes {
     public static final String SEARCH = "/search";
     public static final String TRENDING = "/trending";
     public static final String ADMIN = "/admin";
+    public static final String DASHBOARD = "/dashboard";
+    public static final String COUPONS = "/coupons";
 }
