@@ -7,11 +7,13 @@ import com.think_get_it.pojo.request.RegisterUser;
 import com.think_get_it.pojo.response.*;
 import com.think_get_it.utils.ConfigLoader;
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.response.Response;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.think_get_it.api.applicationApi.OrderApi.getOrders;
 import static com.think_get_it.api.applicationApi.ProductApi.getProducts;
 import static com.think_get_it.api.applicationApi.UserApi.getUserAddress;
 
@@ -147,6 +149,11 @@ public class RestResources {
         queryParams.put("page", 1);
         queryParams.put("status", "PENDING");
         return queryParams;
+    }
+
+    public static String getOrderId() {
+        Response res = getOrders(orderDetails());
+        return res.jsonPath().getString("data[0].id");
     }
 
 }

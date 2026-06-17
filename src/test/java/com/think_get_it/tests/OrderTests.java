@@ -22,18 +22,27 @@ public class OrderTests {
     @Test
     public void getOrderTest() {
         Response res = getOrders(orderDetails());
-        assertEquals(res.statusCode(), 200);
+        boolean success = res.jsonPath().getBoolean("success");
+        String message = res.jsonPath().getString("message");
+        assertTrue(success);
+        assertEquals(message, "Success");
     }
 
     @Test
     public void getSingleOrderTest() {
-        Response res = getSingleOrder(getProductId("Ubrtiuob"));
-        assertEquals(res.statusCode(), 200);
+        Response res = getSingleOrder(getOrderId());
+        boolean success = res.jsonPath().getBoolean("success");
+        String message = res.jsonPath().getString("message");
+        assertTrue(success);
+        assertEquals(message, "Success");
     }
 
     @Test
     public void cancelOrderTest() {
-        Response res = cancelOrder(getProductId("Ubrtiuob"));
-        assertEquals(res.statusCode(), 200);
+        Response res = cancelOrder(getOrderId());
+        boolean success = res.jsonPath().getBoolean("success");
+        String message = res.jsonPath().getString("message");
+        assertTrue(success);
+        assertEquals(message, "order Cancelled");
     }
 }
