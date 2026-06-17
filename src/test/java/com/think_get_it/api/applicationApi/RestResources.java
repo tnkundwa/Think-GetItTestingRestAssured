@@ -1,18 +1,21 @@
 package com.think_get_it.api.applicationApi;
 
 import com.github.javafaker.Faker;
+import com.think_get_it.pojo.request.CouponsPojo;
 import com.think_get_it.pojo.request.LoginUserReq;
 import com.think_get_it.pojo.request.RegisterUser;
-import com.think_get_it.pojo.response.ProductsEndPointData;
-import com.think_get_it.pojo.response.ResponsePojo;
+import com.think_get_it.pojo.response.*;
 import com.think_get_it.utils.ConfigLoader;
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.response.Response;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.think_get_it.api.applicationApi.OrderApi.getOrders;
 import static com.think_get_it.api.applicationApi.ProductApi.getProducts;
+import static com.think_get_it.api.applicationApi.UserApi.getUserAddress;
 
 public class RestResources {
 
@@ -88,9 +91,22 @@ public class RestResources {
         return singleProduct.getId();
     }
 
+    public static String getProductIdInCart(int product) {
+        ResponsePojo<CartDataPojo> res = CartApi.getCart().as(new TypeRef<ResponsePojo<CartDataPojo>>() {
+        });
+        List<ItemsPojo> allItems = res.getData().getItems();
+        return allItems.get(product).getId();
+    }
+
+    public static String getAddressId() {
+        AddressDataPojo data = getUserAddress();
+        return data.getId();
+    }
+
+
     public static Map<String, String> itemToOrder() {
         Map<String, String> request = new HashMap<>();
-        request.put("addressId", "kk21st");
+        request.put("addressId", getAddressId());
         request.put("paymentMethod", "CASH_ON_DELIVERY");
         request.put("notes", "Leave it and go home");
         request.put("shippingFee", "0");
@@ -105,10 +121,39 @@ public class RestResources {
         return request;
     }
 
+    public static CouponsPojo getCoupons() {
+        CouponsPojo coupons = new CouponsPojo();
+        coupons.setCode("code");
+        coupons.setDescription("description");
+        coupons.setDiscountType("PERCENTAGE");
+        coupons.setDiscountValue(1);
+        coupons.setMinOrderAmount(12);
+        coupons.setMaxUsers(10);
+        coupons.setExpiresAt("2026-06-16T07:39:03.334Z");
+        return coupons;
+    }
+
+    public static Map<String, Object> searchProduct() {
+        Map<String, Object> request = new HashMap<>();
+        request.put("searchQuery", "q");
+        request.put("limit", 1);
+        request.put("category", "home");
+        request.put("minPrice", 5);
+        request.put("maxPrice", 12);
+        request.put("sort", "price_asc");
+        return request;
+    }
+
     public static Map<String, Object> orderDetails() {
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("page", 1);
         queryParams.put("status", "PENDING");
         return queryParams;
     }
+
+    public static String getOrderId() {
+        Response res = getOrders(orderDetails());
+        return res.jsonPath().getString("data[0].id");
+    }
+
 }

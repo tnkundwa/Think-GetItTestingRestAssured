@@ -40,7 +40,7 @@ public class CartApi {
                 .extract().response();
     }
 
-    public static Response updateCartQuantity(String quantity, String itemId) {
+    public static Response updateCartQuantity(Integer quantity, String itemId) {
         return given(getRequestSpec())
                 .pathParam("itemId", itemId)
                 .when()

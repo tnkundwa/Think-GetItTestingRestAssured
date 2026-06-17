@@ -20,7 +20,7 @@ public class CartDataPojo {
 
     private String updatedAt;
 
-    private List<Object> items;
+    private List<ItemsPojo> items;
 
     private Integer subtotal;
 

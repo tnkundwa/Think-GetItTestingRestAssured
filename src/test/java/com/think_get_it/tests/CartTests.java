@@ -9,8 +9,11 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static com.think_get_it.api.applicationApi.RestResources.getProductDetails;
-import static com.think_get_it.api.applicationApi.RestResources.getProductId;
+import static com.think_get_it.api.applicationApi.RestResources.getProductIdInCart;
+import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 import static org.testng.AssertJUnit.assertEquals;
 
 public class CartTests {
@@ -33,11 +36,21 @@ public class CartTests {
 
     @Test
     public void updateCartItemQuantityTest() {
-        Response res = CartApi.updateCartQuantity("5", getProductId("Ubrtiuob"));
+        Response res = CartApi.updateCartQuantity(5, getProductIdInCart(1));
+        res.then()
+                .body("success", equalTo(true))
+                .body("message", equalTo("Cart updated"))
+                .body("data", emptyOrNullString());
     }
 
     @Test
     public void deleteItemFromCartTest() {
-        Response res = CartApi.deleteItemFromCart(getProductId("Ubrtiuob"));
+        Response res = CartApi.deleteItemFromCart(getProductIdInCart(1));
+        boolean success = res.jsonPath().getBoolean("success");
+        String message = res.jsonPath().getString("message");
+        java.util.Map<Object, Object> data = res.jsonPath().getMap("data");
+        assertTrue(success);
+        assertEquals("Item removed", message);
+        assertTrue(data.isEmpty());
     }
 }
