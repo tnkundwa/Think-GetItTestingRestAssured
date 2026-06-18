@@ -1,55 +1,40 @@
 package com.think_get_it.api.applicationApi;
 
 import com.think_get_it.api.Routes;
+import com.think_get_it.pojo.request.CouponsPojo;
 import io.restassured.response.Response;
-
-import java.util.Map;
 
 import static com.think_get_it.api.SpecBuilder.getRequestSpec;
 import static com.think_get_it.api.SpecBuilder.getResponseSpecLogin;
 import static io.restassured.RestAssured.given;
 
-public class OrderApi {
+public class AdminApi {
 
-    public static Response placeNewOrder(Map<String, String> params) {
-
-        return given(getRequestSpec()).
-                when()
-                .body(params)
-                .post(Routes.ORDERS)
+    public static Response getDashboardAnalytics() {
+        return given(getRequestSpec())
+                .when()
+                .get(Routes.ADMIN + Routes.DASHBOARD)
                 .then()
                 .spec(getResponseSpecLogin())
                 .extract().response();
     }
 
-    public static Response getOrders(Map<String, Object> queryParams) {
-
+    public static Response getAllUsers(int page, String search) {
         return given(getRequestSpec())
-                .queryParams(queryParams)
+                .queryParam("page", page)
+                .queryParam("search", search)
                 .when()
-                .get(Routes.ORDERS)
+                .get(Routes.ADMIN + Routes.USERS)
                 .then()
                 .spec(getResponseSpecLogin())
                 .extract().response();
     }
 
-    public static Response getSingleOrder(String orderId) {
-
+    public static Response createCoupons(CouponsPojo couponsPojo) {
         return given(getRequestSpec())
-                .pathParam("id", orderId)
                 .when()
-                .get(Routes.ORDERS)
-                .then()
-                .spec(getResponseSpecLogin())
-                .extract().response();
-    }
-
-    public static Response cancelOrder(String orderId) {
-
-        return given(getRequestSpec())
-                .pathParam("id", orderId)
-                .when()
-                .patch(Routes.ORDERS + "/{id}" + Routes.CANCEL)
+                .body(couponsPojo)
+                .post(Routes.ADMIN + Routes.COUPONS)
                 .then()
                 .spec(getResponseSpecLogin())
                 .extract().response();

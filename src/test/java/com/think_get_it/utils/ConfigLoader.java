@@ -17,34 +17,33 @@ public class ConfigLoader {
         return configLoader;
     }
 
-    public String getClientId() {
-        String prop = properties.getProperty("client_id");
+    public String getAccessTokenAdmin() {
+        String prop = properties.getProperty("access_token_admin");
         if (prop != null) return prop;
-        else throw new RuntimeException("property client_id is not specified in the config.properties file");
+        else throw new RuntimeException("property access_token_admin is not specified in the config.properties file");
     }
 
-//    public String getClientSecret(){
-//        String prop = properties.getProperty("client_secret");
-//        if(prop != null) return prop;
-//        else throw new RuntimeException("property client_secret is not specified in the config.properties file");
-//    }
-
-    public String getGrantType() {
-        String prop = properties.getProperty("grant_type");
+    public String getUserEmail() {
+        String prop = properties.getProperty("user_email");
         if (prop != null) return prop;
-        else throw new RuntimeException("property grant_type is not specified in the config.properties file");
+        else throw new RuntimeException("property user_email is not specified in the config.properties file");
     }
 
-//    public String getRefreshToken(){
-//        String prop = properties.getProperty("refresh_token");
-//        if(prop != null) return prop;
-//        else throw new RuntimeException("property refresh_token is not specified in the config.properties file");
-//    }
-
-    public String getUser() {
-        String prop = properties.getProperty("user_id");
+    public String getAdminEmail() {
+        String prop = properties.getProperty("admin_email");
         if (prop != null) return prop;
-        else throw new RuntimeException("property user_id is not specified in the config.properties file");
+        else throw new RuntimeException("property admin_email is not specified in the config.properties file");
     }
 
+    public String getPassword() {
+        String prop = properties.getProperty("password");
+        if (prop != null) return prop;
+        else throw new RuntimeException("property password is not specified in the config.properties file");
+    }
+
+    public String getAccessTokenUser() {
+        String prop = properties.getProperty("access_token_user");
+        if (prop != null) return prop;
+        else throw new RuntimeException("property access_token_user is not specified in the config.properties file");
+    }
 }

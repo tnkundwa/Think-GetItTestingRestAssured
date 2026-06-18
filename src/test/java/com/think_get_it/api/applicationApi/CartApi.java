@@ -1,24 +1,63 @@
 package com.think_get_it.api.applicationApi;
 
 
+import com.think_get_it.api.Routes;
 import io.restassured.response.Response;
 
+import java.util.Map;
+
+import static com.think_get_it.api.SpecBuilder.getRequestSpec;
+import static com.think_get_it.api.SpecBuilder.getResponseSpecLogin;
 import static io.restassured.RestAssured.given;
-import static think_get_it.api.SpecBuilder.getRequestSpec;
-import static think_get_it.api.SpecBuilder.getResponseSpecLogin;
 
 public class CartApi {
 
     public static Response getCart() {
         return given(getRequestSpec())
                 .when()
-                .get(think_get_it.api.Routes.CART)
+                .get(Routes.CART)
                 .then()
                 .spec(getResponseSpecLogin())
                 .extract().response();
     }
 
-//    public static Response addProductToCart() {
-//
-//    }
+    public static Response deleteCart() {
+        return given(getRequestSpec())
+                .when()
+                .delete(Routes.CART)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
+    }
+
+    public static Response addCart(Map<String, String> itemToAdd) {
+        return given(getRequestSpec())
+                .when()
+                .body(itemToAdd)
+                .post(Routes.CART + Routes.ITEMS)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
+    }
+
+    public static Response updateCartQuantity(Integer quantity, String itemId) {
+        return given(getRequestSpec())
+                .pathParam("itemId", itemId)
+                .when()
+                .body(quantity)
+                .put(Routes.CART + Routes.ITEMS)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
+    }
+
+    public static Response deleteItemFromCart(String itemId) {
+        return given(getRequestSpec())
+                .pathParam("itemId", itemId)
+                .when()
+                .delete(Routes.CART + Routes.ITEMS)
+                .then()
+                .spec(getResponseSpecLogin())
+                .extract().response();
+    }
 }
