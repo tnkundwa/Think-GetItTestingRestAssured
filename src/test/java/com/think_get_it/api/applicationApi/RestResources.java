@@ -135,12 +135,12 @@ public class RestResources {
 
     public static Map<String, Object> searchProduct() {
         Map<String, Object> request = new HashMap<>();
-        request.put("searchQuery", "q");
+        request.put("searchQuery", "shoes");
         request.put("limit", 1);
         request.put("category", "home");
-        request.put("minPrice", 5);
-        request.put("maxPrice", 12);
-        request.put("sort", "price_asc");
+        request.put("minPrice", 1);
+        request.put("maxPrice", 1000);
+        request.put("sort", "newest");
         return request;
     }
 
