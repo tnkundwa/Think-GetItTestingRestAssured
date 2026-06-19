@@ -123,11 +123,11 @@ public class RestResources {
 
     public static CouponsPojo getCoupons() {
         CouponsPojo coupons = new CouponsPojo();
-        coupons.setCode("code");
+        coupons.setCode("SAVE21NOW");
         coupons.setDescription("description");
         coupons.setDiscountType("PERCENTAGE");
         coupons.setDiscountValue(1);
-        coupons.setMinOrderAmount(12);
+        coupons.setMinOrderAmount(100);
         coupons.setMaxUsers(10);
         coupons.setExpiresAt("2026-06-16T07:39:03.334Z");
         return coupons;
