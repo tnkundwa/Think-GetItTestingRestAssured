@@ -40,5 +40,7 @@ build/
 
 .env
 allure-results/
+allure-report/
+allure-reports/
 
 src/test/resources/config.properties
