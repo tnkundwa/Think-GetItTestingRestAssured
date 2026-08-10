@@ -23,23 +23,11 @@ public class ConfigLoader {
         else throw new RuntimeException("property client_id is not specified in the config.properties file");
     }
 
-//    public String getClientSecret(){
-//        String prop = properties.getProperty("client_secret");
-//        if(prop != null) return prop;
-//        else throw new RuntimeException("property client_secret is not specified in the config.properties file");
-//    }
-
     public String getGrantType() {
         String prop = properties.getProperty("grant_type");
         if (prop != null) return prop;
         else throw new RuntimeException("property grant_type is not specified in the config.properties file");
     }
-
-//    public String getRefreshToken(){
-//        String prop = properties.getProperty("refresh_token");
-//        if(prop != null) return prop;
-//        else throw new RuntimeException("property refresh_token is not specified in the config.properties file");
-//    }
 
     public String getUser() {
         String prop = properties.getProperty("user_id");

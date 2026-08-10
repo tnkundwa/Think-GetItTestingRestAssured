@@ -9,10 +9,6 @@ import io.restassured.specification.ResponseSpecification;
 
 public class SpecBuilder {
 
-    //now you can use the updated token value but here it's still hard coded so keep this in mind
-    static String access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM3OWRlNTc3LWFlOTYtNDM0YS05YTdiLTBkNGU3MDI3YzQwMiIsImlhdCI6MTc3OTQ0MTA1OCwiZXhwIjoxNzgwMDQ1ODU4fQ.7vd4kzJ33_CXA-Afts6GYkx9c9nQoldbjArZtSzO4zw";
-
-
     public static RequestSpecification getRequestSpec() {
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
         requestSpecBuilder.setBaseUri("https://think-and-get-it-production.up.railway.app");
